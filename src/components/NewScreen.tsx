@@ -166,7 +166,7 @@ const NewScreen = ({ editable, flexDirection = 'row', screen, setScreen }: Props
   return (
     <LayoutFlex sx={{ flexDirection }}>
       {screen.rowsColumns.map(({ rowsColumns, flex, flexDirection: flexDirectionRowColumn, name: nameRowColumn }, indexRow) => {
-        const showRowsColumnsTitle = editable || nameRowColumn.length;
+        const showRowsColumnsTitle = editable || (nameRowColumn && nameRowColumn.length);
         return (
           <RowSection key={`row-${indexRow}`}>
             {showRowsColumnsTitle ?

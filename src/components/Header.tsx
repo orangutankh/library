@@ -116,7 +116,6 @@ const Header = ({ handlerShowQuizzModal, open }: Props) => {
     })
     const { user: { displayName, email, photoURL } } = data;
     setUser({ name: displayName, email, photo: photoURL });
-
   }
 
   const handleLogout = async () => {

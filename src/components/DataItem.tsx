@@ -31,7 +31,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import EyeIcon from '@mui/icons-material/Visibility';
-import NextIcon from '@mui/icons-material/QueuePlayNext';
+import OkIcon from '@mui/icons-material/ThumbUp';
+import KoIcon from '@mui/icons-material/ThumbDown';
 import dayjs from 'dayjs';
 import { parseImage } from '../utils/file';
 import { ImagesContext } from '../hooks/imagesContext';
@@ -173,13 +174,14 @@ const DEFAULT_DATAITEM_TYPE = DATAITEM_TYPES[0];
 interface Props {
   canEdit?: boolean;
   data?: DataItemInterfaceWithId;
-  handlerQuizzQuestion?: () => void;
+  handlerQuizzQuestion?: (quizzResult: boolean) => void;
   quizzMode?: boolean;
 }
 
 const CREATION_DATE = new Date().toLocaleDateString().replaceAll('/', '-');
 
-const DataItem = ({ data, canEdit = true, quizzMode = false, handlerQuizzQuestion }: Props) => {
+const DataItem = ({ data, canEdit = true, handlerQuizzQuestion }: Props) => {
+  const quizzMode = Boolean(handlerQuizzQuestion);
   const [autocompleteValue, setAutocompleteValue] = useState<string>('');
   const [editable, setEditable] = useState<boolean>(canEdit && !data);
   const [showAnswer, setShowAnswer] = useState<boolean>(!quizzMode);
@@ -317,7 +319,8 @@ const DataItem = ({ data, canEdit = true, quizzMode = false, handlerQuizzQuestio
                     {values.field1 && (
                       <Typography variant="overline">
                         {values.field1}
-                        {quizzMode && (<QuizzBtnStyled variant="contained" startIcon={<NextIcon />} onClick={handlerQuizzQuestion} >Next question</QuizzBtnStyled>)}
+                        {quizzMode && (<QuizzBtnStyled color="success" variant="contained" startIcon={<OkIcon />} onClick={() => handlerQuizzQuestion && handlerQuizzQuestion(true)} >OK</QuizzBtnStyled>)}
+                        {quizzMode && (<QuizzBtnStyled color="error" variant="contained" startIcon={<KoIcon />} onClick={() => handlerQuizzQuestion && handlerQuizzQuestion(false)} >KO</QuizzBtnStyled>)}
                       </Typography>
                     )}
                     {values.type === 'question' && !showAnswer ? (

@@ -10,6 +10,8 @@ export interface DataItemInterface {
   image?: string;
   type: TYPE_DATAITEM_TYPES;
   userEmail: string;
+  quizzOk?: number; // type = 'question'
+  quizzKo?: number; // type = 'question'
 }
 
 export interface DataItemInterfaceWithId extends DataItemInterface {

@@ -273,7 +273,10 @@ const Body = ({ modalVisible }: Props) => {
                   ))}
                   <CreateScreenBtn
                     endIcon={<AddCircleOutlineIcon />}
-                    onClick={() => setScreen(INITIAL_NEW_SCREEN)}
+                    onClick={() => {
+                      setScreen(INITIAL_NEW_SCREEN)
+                      setActivateEditableScreen(true);
+                    }}
                     variant="contained"
                   >
                     Create screen to sort the data
